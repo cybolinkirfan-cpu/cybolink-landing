@@ -114,15 +114,16 @@ window.addEventListener('scroll', () => {
 // Counter Animation for Stats
 // ===================================
 const animateCounter = (element, target, duration = 2000) => {
-    let current = 0;
+    let start = 0;
     const increment = target / (duration / 16);
+
     const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
+        start += increment;
+        if (start >= target) {
             element.textContent = target;
             clearInterval(timer);
         } else {
-            element.textContent = Math.floor(current);
+            element.textContent = Math.floor(start);
         }
     }, 16);
 };
@@ -130,19 +131,12 @@ const animateCounter = (element, target, duration = 2000) => {
 const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
-            const statNumber = entry.target.querySelector('.stat-number');
-            if (statNumber) {
-                const text = statNumber.textContent;
-                const number = parseInt(text.match(/\d+/)[0]);
-                const suffix = text.replace(/\d+/, '');
-                
+            const countEl = entry.target.querySelector('.count');
+
+            if (countEl) {
+                const target = parseInt(countEl.dataset.target, 10);
                 entry.target.classList.add('animated');
-                animateCounter(statNumber, number);
-                
-                // Add suffix back after animation
-                setTimeout(() => {
-                    statNumber.innerHTML = number + suffix;
-                }, 2000);
+                animateCounter(countEl, target);
             }
         }
     });
@@ -181,6 +175,71 @@ portfolioItems.forEach(item => {
         this.style.transform = 'scale(1)';
     });
 });
+
+// ===================================
+// METHODOLOGY Section Animation
+// ===================================
+const timelineItems = document.querySelectorAll('.timeline-item');
+const timeline = document.querySelector('.timeline');
+const progressLine = document.querySelector('.timeline-progress');
+const methodologySection = document.querySelector('.methodology-section');
+
+const updateProgressLine = (activeItem) => {
+    const timelineRect = timeline.getBoundingClientRect();
+    const itemRect = activeItem.getBoundingClientRect();
+
+    const offset =
+        itemRect.top - timelineRect.top + itemRect.height / 2;
+
+    progressLine.style.height = `${offset}px`;
+};
+
+const timelineObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                timelineItems.forEach(item =>
+                    item.classList.remove('active')
+                );
+
+                entry.target.classList.add('active');
+
+                // Update progress line
+                updateProgressLine(entry.target);
+
+                // Sync left content
+                methodologySection.classList.add('step-active');
+            }
+        });
+    },
+    {
+        threshold: 0.6
+    }
+);
+
+timelineItems.forEach(item => timelineObserver.observe(item));
+
+
+timelineItems.forEach(item => timelineObserver.observe(item));
+
+
+// ===================================
+// Testimonials Carousel 
+// ===================================
+const slides = document.querySelectorAll('.testimonial-slide');
+let currentSlide = 0;
+
+const showSlide = (index) => {
+    slides.forEach(slide => slide.classList.remove('active'));
+    slides[index].classList.add('active');
+};
+
+setInterval(() => {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}, 5000);
+
+
 
 // ===================================
 // Form Validation (if contact form exists)
