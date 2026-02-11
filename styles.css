@@ -1,6 +1,14 @@
 /* ===================================
    CSS Variables & Root Styles
    =================================== */
+@font-face {
+        font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url(./font/popins.woff2) format('woff2');
+}
+
 :root {
     --primary-color: #c53346;
     --background-light: #f8f6f6;
@@ -11,7 +19,7 @@
     --text-muted-dark: #94a3b8;
     --border-color: rgba(255, 255, 255, 0.1);
     --glass-bg: rgba(255, 255, 255, 0.03);
-    --font-display: 'Inter', sans-serif;
+    --font-display: 'poppins', sans-serif;
 }
 
 /* ===================================
