@@ -2,7 +2,7 @@
    CSS Variables & Root Styles
    =================================== */
 @font-face {
-        font-family: 'Poppins';
+    font-family: 'Poppins';
     font-style: normal;
     font-weight: 300;
     font-display: swap;
@@ -187,8 +187,9 @@ body.dark-theme {
     background: linear-gradient(135deg, var(--primary-color) 30%, #f87171 100%);
     -webkit-background-clip: text;
     background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color:transparent;
     display: inline-block;
+    padding: 0.55rem 0;
 }
 
 .hero-description {
