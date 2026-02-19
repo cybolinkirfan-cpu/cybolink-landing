@@ -194,7 +194,7 @@ body.dark-theme {
     background: linear-gradient(135deg, var(--primary-color) 30%, #f87171 100%);
     -webkit-background-clip: text;
     background-clip: text;
-    -webkit-text-fill-color:transparent;
+    -webkit-text-fill-color: transparent;
     display: inline-block;
     padding: 0.55rem 0;
 }
@@ -271,6 +271,7 @@ a {
     text-decoration: none;
     display: inline-block;
 }
+
 a:hover {
     color: white;
 }
@@ -312,7 +313,7 @@ a:hover {
 /* Header */
 
 .why-header {
-    text-align:start;
+    text-align: start;
     max-width: 800px;
     margin: 0 auto 4rem auto;
 }
@@ -465,7 +466,7 @@ a:hover {
 
 .card-content {
     position: relative;
-    z-index: 10;   
+    z-index: 10;
 }
 
 .icon-large {
@@ -1247,20 +1248,23 @@ textarea.form-control {
 /* Command Grid Container */
 .command-grid {
     display: grid;
-    grid-template-columns: repeat(1, 1fr); /* Mobile: 1 column */
+    grid-template-columns: repeat(1, 1fr);
+    /* Mobile: 1 column */
     gap: 1.5rem;
     padding: 2rem 0;
 }
 
 @media (min-width: 768px) {
     .command-grid {
-        grid-template-columns: repeat(2, 1fr); /* Tablet: 2 columns */
+        grid-template-columns: repeat(2, 1fr);
+        /* Tablet: 2 columns */
     }
 }
 
 @media (min-width: 992px) {
     .command-grid {
-        grid-template-columns: repeat(3, 1fr); /* Desktop: 3 columns */
+        grid-template-columns: repeat(3, 1fr);
+        /* Desktop: 3 columns */
     }
 }
 
@@ -1270,7 +1274,8 @@ textarea.form-control {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 280px; /* Ensures all cards are tall and equal */
+    min-height: 280px;
+    /* Ensures all cards are tall and equal */
     padding: 2.5rem;
     transition: transform 0.4s ease, background 0.3s ease;
     overflow: hidden;
@@ -1279,7 +1284,8 @@ textarea.form-control {
 /* Hover State: Lift and Lighten */
 .command-card:hover {
     transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.08); /* Slightly lighter glass */
+    background: rgba(255, 255, 255, 0.08);
+    /* Slightly lighter glass */
 }
 
 /* Icon Styling */
@@ -1289,15 +1295,18 @@ textarea.form-control {
 
 .icon-glow {
     font-size: 3rem;
-    color: var(--primary-color); /* Assuming red from your previous code */
+    color: var(--primary-color);
+    /* Assuming red from your previous code */
     opacity: 0.8;
     transition: all 0.3s ease;
-    text-shadow: 0 0 20px rgba(236, 19, 19, 0.2); /* Subtle neon glow */
+    text-shadow: 0 0 20px rgba(236, 19, 19, 0.2);
+    /* Subtle neon glow */
 }
 
 .command-card:hover .icon-glow {
     transform: scale(1.1);
-    color: #fff; /* Turns white on hover */
+    color: #fff;
+    /* Turns white on hover */
     opacity: 1;
 }
 
@@ -1313,7 +1322,8 @@ textarea.form-control {
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: var(--text-muted); /* Grey color */
+    color: var(--text-muted);
+    /* Grey color */
     font-weight: 600;
 }
 
@@ -1329,16 +1339,54 @@ textarea.form-control {
 }
 
 /* Define positions for the borders */
-.border-top { top: 0; left: 0; width: 0%; height: 3px; }
-.border-bottom { bottom: 0; right: 0; width: 0%; height: 3px; }
-.border-left { top: 0; left: 0; width: 3px; height: 0%; }
-.border-right { bottom: 0; right: 0; width: 3px; height: 0%; }
+.border-top {
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+}
+
+.border-bottom {
+    bottom: 0;
+    right: 0;
+    width: 0%;
+    height: 3px;
+}
+
+.border-left {
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 0%;
+}
+
+.border-right {
+    bottom: 0;
+    right: 0;
+    width: 3px;
+    height: 0%;
+}
 
 /* Animate on Hover */
-.command-card:hover .border-top { width: 100%; opacity: 1; }
-.command-card:hover .border-bottom { width: 100%; opacity: 1; }
-.command-card:hover .border-left { height: 100%; opacity: 1; }
-.command-card:hover .border-right { height: 100%; opacity: 1; }
+.command-card:hover .border-top {
+    width: 100%;
+    opacity: 1;
+}
+
+.command-card:hover .border-bottom {
+    width: 100%;
+    opacity: 1;
+}
+
+.command-card:hover .border-left {
+    height: 100%;
+    opacity: 1;
+}
+
+.command-card:hover .border-right {
+    height: 100%;
+    opacity: 1;
+}
 
 
 
@@ -1364,14 +1412,14 @@ textarea.form-control {
 }
 
 /* The Spotlight Effect */
-.services-spotlight-grid:hover .service-focus-card:not(:hover) {
+/* .services-spotlight-grid:hover .service-focus-card:not(:hover) {
     opacity: 0.4;
     filter: blur(2px) grayscale(0.5);
     transform: scale(0.95);
-}
+} */
 
 .service-focus-card:hover {
-    transform: scale(1.02);
+    transform: scale(1.03);
     border-color: var(--primary-color);
     background: rgba(255, 255, 255, 0.05);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
@@ -1383,6 +1431,7 @@ textarea.form-control {
     color: var(--primary-color);
 }
 
+/* 
 .service-name {
     font-size: 1.5rem;
     font-weight: 700;
@@ -1399,8 +1448,36 @@ textarea.form-control {
     position: absolute;
     top: 1rem;
     right: 1.5rem;
-    font-family: 'Space Mono', monospace; /* Or any techy font */
+    font-family: 'Space Mono', monospace;
     font-size: 0.8rem;
     opacity: 0.3;
     font-weight: 700;
+} */
+
+/* ===================================
+   Custom Scrollbar
+   =================================== */
+/* Webkit Browsers */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 6px;
+    border: 3px solid var(--background-dark);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #d11111;
+}
+
+/* Firefox */
+html {
+    scrollbar-color: var(--primary-color) var(--background-dark);
+    scrollbar-width: thin;
 }
