@@ -101,14 +101,71 @@ if (window.pageYOffset < 300) {
 // Parallax Effect for Hero Section
 // ===================================
 const heroVisual = document.querySelector('.hero-visual');
+let heroParallaxTarget = 0;
+let heroParallaxCurrent = 0;
+let heroParallaxFrame = null;
 
-window.addEventListener('scroll', () => {
-    if (heroVisual) {
-        const scrolled = window.pageYOffset;
-        const parallaxSpeed = 0.5;
-        heroVisual.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
+const getHeroParallaxSettings = () => {
+    if (window.innerWidth <= 767) {
+        return {
+            speed: 0.12,
+            delay: 140,
+            easing: 0.08
+        };
     }
-});
+
+    if (window.innerWidth <= 991) {
+        return {
+            speed: 0.18,
+            delay: 90,
+            easing: 0.1
+        };
+    }
+
+    return {
+        speed: 0.5,
+        delay: 0,
+        easing: 0.14
+    };
+};
+
+const animateHeroParallax = () => {
+    const difference = heroParallaxTarget - heroParallaxCurrent;
+
+    if (Math.abs(difference) < 0.1) {
+        heroParallaxCurrent = heroParallaxTarget;
+        heroVisual.style.transform = `translateY(${heroParallaxCurrent}px)`;
+        heroParallaxFrame = null;
+        return;
+    }
+
+    const { easing } = getHeroParallaxSettings();
+    heroParallaxCurrent += difference * easing;
+    heroVisual.style.transform = `translateY(${heroParallaxCurrent}px)`;
+    heroParallaxFrame = requestAnimationFrame(animateHeroParallax);
+};
+
+const updateHeroParallax = () => {
+    if (!heroVisual) {
+        return;
+    }
+
+    const scrolled = window.pageYOffset;
+    const { speed, delay } = getHeroParallaxSettings();
+    const adjustedScroll = Math.max(0, scrolled - delay);
+
+    heroParallaxTarget = adjustedScroll * speed;
+
+    if (!heroParallaxFrame) {
+        heroParallaxFrame = requestAnimationFrame(animateHeroParallax);
+    }
+};
+
+if (heroVisual) {
+    updateHeroParallax();
+    window.addEventListener('scroll', updateHeroParallax, { passive: true });
+    window.addEventListener('resize', updateHeroParallax);
+}
 
 // ===================================
 // Counter Animation for Stats
@@ -158,21 +215,6 @@ bentoCards.forEach(card => {
     
     card.addEventListener('mouseleave', function() {
         this.style.transform = 'translateY(0)';
-    });
-});
-
-// ===================================
-// Portfolio Item Hover Sound Effect (Optional)
-// ===================================
-const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-portfolioItems.forEach(item => {
-    item.addEventListener('mouseenter', function() {
-        this.style.transform = 'scale(1.02)';
-    });
-    
-    item.addEventListener('mouseleave', function() {
-        this.style.transform = 'scale(1)';
     });
 });
 
@@ -277,51 +319,6 @@ if (contactForm) {
     });
 }
 
-// ===================================
-// Dark Mode Toggle (Optional Enhancement)
-// ===================================
-const createDarkModeToggle = () => {
-    const toggle = document.createElement('button');
-    toggle.innerHTML = '<span class="material-symbols-outlined">dark_mode</span>';
-    toggle.className = 'dark-mode-toggle';
-    toggle.style.cssText = `
-        position: fixed;
-        top: 2rem;
-        right: 2rem;
-        z-index: 1050;
-        width: 3rem;
-        height: 3rem;
-        border-radius: 50%;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        color: white;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-    `;
-    
-    toggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-theme');
-        const isDark = document.body.classList.contains('dark-theme');
-        toggle.querySelector('.material-symbols-outlined').textContent = isDark ? 'light_mode' : 'dark_mode';
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    });
-    
-    // Check for saved theme preference
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-        document.body.classList.remove('dark-theme');
-        toggle.querySelector('.material-symbols-outlined').textContent = 'dark_mode';
-    }
-    
-    document.body.appendChild(toggle);
-};
-
-// Uncomment to enable dark mode toggle
-// createDarkModeToggle();
 
 // ===================================
 // Loading Animation

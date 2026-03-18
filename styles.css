@@ -141,6 +141,11 @@ body.dark-theme {
     /* Bleed to the right */
 }
 
+.hero-row {
+    --bs-gutter-x: clamp(2rem, 4vw, 4rem);
+    --bs-gutter-y: 2.5rem;
+}
+
 .hero-content {
     display: flex;
     flex-direction: column;
@@ -211,16 +216,18 @@ body.dark-theme {
    =================================== */
 .hero-visual {
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
 }
 
 .hero-image {
     position: relative;
-    width: 90%;
-    height: 90%;
+    width: min(100%, 760px);
+    height: clamp(480px, 88vh, 920px);
+    margin-left: auto;
     background-size: cover;
     background-position: center;
     border-radius: 2rem 0 0 2rem;
@@ -1202,6 +1209,47 @@ textarea.form-control {
    Responsive Utilities
    =================================== */
 @media (max-width: 991px) {
+    .hero-section {
+        min-height: auto;
+    }
+
+    .hero-section .container-custom {
+        padding-left: clamp(1rem, 4vw, 2rem);
+        padding-right: clamp(1rem, 4vw, 2rem);
+    }
+
+    .hero-row {
+        --bs-gutter-x: 1.5rem;
+        --bs-gutter-y: 2rem;
+    }
+
+    .hero-content {
+        gap: 2rem;
+        padding: 4rem 0 1rem;
+    }
+
+    .hero-description {
+        max-width: 100%;
+    }
+
+    .hero-visual {
+        min-height: auto;
+        justify-content: center;
+    }
+
+    .hero-image {
+        width: 100%;
+        height: clamp(320px, 65vw, 560px);
+        border-radius: 1.5rem;
+    }
+
+    .glow-effect {
+        right: 50%;
+        width: 70%;
+        height: 70%;
+        transform: translate(50%, -50%);
+    }
+
     .section-title-large {
         font-size: 2.5rem;
     }
@@ -1214,6 +1262,15 @@ textarea.form-control {
 @media (max-width: 767px) {
     .hero-section {
         padding: 2rem 0;
+    }
+
+    .hero-content {
+        padding: 2rem 0 0;
+    }
+
+    .hero-image {
+        height: clamp(280px, 75vw, 420px);
+        border-radius: 1.25rem;
     }
 
     .stats-section {
